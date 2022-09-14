@@ -7,6 +7,7 @@ classes_file =input("Classes filepath: ")
 
 with open(classes_file, "r") as file:
     classes = [line.rstrip() for line in file.readlines()]
+    nclasses = len(classes)
     classes_count = {_class:0 for _class in classes}
 
 # Explore all sub-directories in a directory
@@ -21,7 +22,7 @@ def explore(root):
                 for line in lines:
                     if len(line.split()) == 5:
                         class_id = int(line.split()[0])
-                        if class_id <= 11 and class_id >= 0:
+                        if class_id <= nclasses-1 and class_id >= 0:
                             classes_count[classes[class_id]] += 1
                             total_images += 1
         if os.path.isdir(file):
