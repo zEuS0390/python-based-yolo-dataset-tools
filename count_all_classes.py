@@ -15,8 +15,8 @@ def explore(root):
     total_images = 0
     files = glob.glob(os.path.join(root, "*"))
     for file in files:
-        # if os.path.splitext(os.path.basename(file))[0] == "classes":
-        #     continue
+        if os.path.splitext(os.path.basename(file))[0] == "classes":
+            continue
         fileType = os.path.splitext(os.path.basename(file))[1]
         if fileType == ".txt":
             with open(file, "r") as textFile:
