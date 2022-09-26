@@ -1,8 +1,13 @@
-import os, glob
+import os, glob, sys
 
 # Verify YOLO format labels
 directory = input("Input directory: ")
 nvalues = 5 # Number of values of the standard YOLO format
+nfound = 0
+
+if not os.path.exists(directory) or not os.path.isdir(directory):
+    sys.stdout.write("Invalid input directory.\n")
+    sys.exit()
 
 files =  [os.path.normpath(file) for file in glob.glob(os.path.join(directory, "*.txt"))]
 for file in files:
@@ -14,4 +19,7 @@ for file in files:
         for line in lines:
             n = len(line.split())
             if n != nvalues:
-                print(f"{file} has {n} values")
+                sys.stdout.write(f"{file} has {n} values.\n")
+                n += 1
+
+sys.stdout.write(f"Found {nfound} invalid files.\n")
