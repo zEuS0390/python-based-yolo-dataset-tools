@@ -71,7 +71,14 @@ for img_label in img_labels:
             height = float(values[4])
             box_values = getBoxValues(img_width, img_height, BoxValues(center_x, center_y, width, height))
             cropped_image = img[box_values.y: box_values.y+box_values.height, box_values.x: box_values.x+box_values.width]
-            cv2.imwrite(os.path.join(output_directory, class_name, f"{filename}_{class_name}_{ncls[class_name]}.jpg"), cropped_image)
+            try:
+                cv2.imwrite(os.path.join(output_directory, class_name, f"{filename}_{class_name}_{ncls[class_name]}.jpg"), cropped_image)
+            except Exception as e:
+                print(f"Error: {e}")
+                print(f"Output Directory: {output_directory}")
+                print(f"Class Name: {class_name}")
+                print(f"Filename: {filename}")
+                print(f"Image Size: {cropped_image.shape[0]}x{cropped_image.shape[1]}")
             ncls[class_name] += 1
         
 if success:
