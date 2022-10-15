@@ -12,13 +12,14 @@ with open(classes_file, "r") as file:
 
 # Explore all sub-directories in a directory
 def explore(root):
-    total_images = 0
     files = glob.glob(os.path.join(root, "*"))
+    total_images = 0
     for file in files:
         if os.path.splitext(os.path.basename(file))[0] == "classes":
             continue
         fileType = os.path.splitext(os.path.basename(file))[1]
         if fileType == ".txt":
+            total_images += 1
             with open(file, "r") as textFile:
                 lines = [line.rstrip() for line in textFile.readlines()]
                 for line in lines:
@@ -26,7 +27,6 @@ def explore(root):
                         class_id = int(line.split()[0])
                         if class_id <= nclasses-1 and class_id >= 0:
                             classes_count[classes[class_id]] += 1
-                            total_images += 1
         if os.path.isdir(file):
             total_images += explore(file)
     return total_images
