@@ -31,8 +31,13 @@ def explore(root):
             total_images += explore(file)
     return total_images
 
-texts = explore(path)
+total_images = explore(path)
 
-print("\n\tClasses:\n")
+print("\n\tClasses: \n")
 for _class in classes_count:
     print("\t"+f"{_class:<20s}: {classes_count[_class]}")
+print(f"\n\tTotal Images: {total_images}")
+total_boxes = 0
+for cls in classes_count:
+    total_boxes += classes_count[cls]
+print(f"\n\tTotal Boxes: {total_boxes}")
