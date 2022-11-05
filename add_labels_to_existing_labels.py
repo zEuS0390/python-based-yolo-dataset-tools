@@ -16,12 +16,19 @@ source_labels = glob.glob(os.path.join(source_directory, "*.txt"))
 for source_label in source_labels:
     filename = os.path.basename(source_label)
     destination_label = os.path.join(destination_directory, filename)
+    # Check if the destination label exists
     if os.path.exists(destination_label):
+        # Get the source label lines
         with open(source_label, "r") as file:
-            lines = [line.strip() for line in file.readlines()]
+            source_label_lines = [line.strip() for line in file.readlines()]
+        # Check if the current line already exist in the destination label
+        with open(destination_label, "r") as file:
+            destination_label_lines = [line.strip() for line in file.readlines()]
+        # Verify existence before adding the new labels
         with open(destination_label, "a") as file:
-            for line in lines:
-                file.write(f"{line}\n")
+            for source_label_line in source_label_lines:
+                if source_label_line not in destination_label_lines:
+                    file.write(f"{source_label_line}\n")
         print(f"{source_label} OK")
     else:
         print(f"{destination_label} does not exist.")
