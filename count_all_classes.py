@@ -1,9 +1,7 @@
 import os, glob
 
-path = input("Dataset Directory: ")
-# classes_file = input("Classes Text File: ")
+path = input("Labels directory: ")
 classes_file =input("Classes filepath: ")
-
 
 with open(classes_file, "r") as file:
     classes = [line.rstrip() for line in file.readlines()]
@@ -36,8 +34,8 @@ total_images = explore(path)
 print("\n\tClasses: \n")
 for _class in classes_count:
     print("\t"+f"{_class:<20s}: {classes_count[_class]}")
-print(f"\n\tTotal Images: {total_images}")
+print(f"\n\tTotal Images: {total_images}", end="")
 total_boxes = 0
 for cls in classes_count:
     total_boxes += classes_count[cls]
-print(f"\n\tTotal Boxes: {total_boxes}")
+print(f"\n\tTotal Boxes: {total_boxes}", end="")
