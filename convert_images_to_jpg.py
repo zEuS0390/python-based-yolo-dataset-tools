@@ -27,3 +27,5 @@ for file in files:
     fileType = os.path.basename(os.path.splitext(file)[1])
     if fileType in imageTypes:
         convertImageToJPG(converted_dir, file)
+    else:
+        print(f"Invalid file format: {file}")
