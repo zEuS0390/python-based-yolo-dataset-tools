@@ -21,10 +21,16 @@ def changeIndex(label:str):
         return " ".join(values)
     return " ".join(values)
 
+# Loop through all files
 for txt in TXTs:
-    with open(txt, "r+") as file:
-        lines = [line.rstrip() for line in file.readlines()]
-        file.seek(0)
+
+    # Read
+    with open(txt, "r") as file:
+        lines = [l.rstrip() for l in file.readlines()]
+        for index in range(len(lines)):
+            lines[index] = changeIndex(lines[index])
+
+    # Write
+    with open(txt, "w") as file:
         for line in lines:
-            newLine = changeIndex(line)+"\n"
-            file.write(newLine)
+            file.write(line+"\n")
